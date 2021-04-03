@@ -21,6 +21,14 @@ interface CustomTableProps {
   handleEdit: (item: OrderType) => void;
 }
 
+const parseDate = (data: any) => {
+  if (["number", "string"].includes(typeof data)) {
+    return new Date(data).toLocaleDateString();
+  } else {
+    return "N/A";
+  }
+};
+
 const CustomTable: React.FC<CustomTableProps> = ({
   headers,
   data,
@@ -41,11 +49,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
         <Tbody>
           {data.map((item, index) => (
             <Tr key={index}>
-              <Td>{item.title}</Td>
-              <Td>{item.bookingDate}</Td>
-              <Td>{item.address.street}</Td>
-              <Td>{item.address.country}</Td>
-              <Td>{item.customer.name}</Td>
+              <Td>{item?.title || "N/A"}</Td>
+              <Td>{parseDate(item.bookingDate)}</Td>
+              <Td>{item?.address?.street || "N/A"}</Td>
+              <Td>{item?.address?.country || "N/A"}</Td>
+              <Td>{item?.customer?.name || "N/A"}</Td>
               <Td>
                 <Button
                   onClick={() => handleEdit(item)}
