@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import { fireStore } from "./firebase";
 
 const orderRef = fireStore.collection("orders");
@@ -21,3 +23,12 @@ export const getOrders = async (direction: "next" | "prev", docToUse?: any) => {
     return error;
   }
 };
+
+export const addNewOrder = async (payload: any) => {
+  try {
+    const response = await axios.post('http://localhost:3090/orders', payload)
+    console.log(response.data, '-==>>')
+  } catch (error) {
+    throw error
+  }
+}

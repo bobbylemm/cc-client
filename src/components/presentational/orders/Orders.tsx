@@ -1,17 +1,26 @@
 import React from "react";
 import { Flex, Box, Button } from "@chakra-ui/react";
 import CustomTable from "./OrdersTable";
+import AddOrderModal, { AddOrderModalProps } from "./NewOrder";
 
 interface OrdersViewProps {
   headers: string[];
   data: any[];
   handleFetch: (direction: "next" | "prev") => void;
+  addNewOrderProps: Partial<AddOrderModalProps>;
+  modalIsOpen: boolean;
+  handleCloseModal: () => void;
+  handleOpenModal: () => void;
 }
 
 const OrdersView: React.FC<OrdersViewProps> = ({
   headers,
   data,
   handleFetch,
+  handleOpenModal,
+  handleCloseModal,
+  addNewOrderProps,
+  modalIsOpen,
 }) => {
   return (
     <>
@@ -23,7 +32,7 @@ const OrdersView: React.FC<OrdersViewProps> = ({
         flexDirection="column"
       >
         <Flex mb="1rem" justifyContent="flex-end" width="60%">
-          <Button size="md" color="#1C3738">
+          <Button size="md" color="#1C3738" onClick={handleOpenModal}>
             New Order
           </Button>
         </Flex>
@@ -36,6 +45,11 @@ const OrdersView: React.FC<OrdersViewProps> = ({
           <CustomTable {...{ headers, data, handleFetch }} />
         </Box>
       </Flex>
+      <AddOrderModal
+        {...addNewOrderProps}
+        onClose={handleCloseModal}
+        isOpen={modalIsOpen}
+      />
     </>
   );
 };
