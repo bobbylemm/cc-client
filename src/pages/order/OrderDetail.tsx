@@ -26,8 +26,6 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ match }) => {
     bookingDate: Yup.string().required("booking date required"),
   });
 
-  console.log(match.params.orderId, "-=>orderIdorderId");
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -48,6 +46,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ match }) => {
       };
       await updateOrder(payload, match.params.orderId);
       resetForm();
+      history.push("/orders");
       toast({
         title: "Order Updated Successfully.",
         description: "you have updated this order successfully",

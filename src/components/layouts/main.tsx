@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { useUserProfile } from "../../hooks/useUserProfile";
+import { Navbar } from "../reusable";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -7,7 +8,12 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   useUserProfile();
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  );
 };
 
 export default MainLayout;

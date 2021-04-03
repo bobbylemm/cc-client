@@ -18,10 +18,7 @@ const OrderDetailView: React.FC<OrderDetailViewProps> = ({
 }) => {
   return (
     <Flex minHeight="100vh" backgroundColor="#1C3738" flexDirection="column">
-      <Flex justifyContent="flex-start" flex={0.2} p="1rem">
-        <Button onClick={navigateBack}>Go back</Button>
-      </Flex>
-      <Flex justifyContent="center" alignItems="center">
+      <Flex justifyContent="center" alignItems="center" my="auto">
         <Flex
           background="white"
           px="2rem"

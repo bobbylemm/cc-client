@@ -73,14 +73,27 @@ const CustomTable: React.FC<CustomTableProps> = ({
       )}
       <Tfoot>
         <Tr>
-          <Th>
-            <Button onClick={() => handleFetch("prev")}>Prev</Button>
+          <Th py="1rem">
+            <Button
+              backgroundColor="#4D4847"
+              onClick={() => handleFetch("prev")}
+              color="#fff"
+            >
+              Prev Page
+            </Button>
           </Th>
           <Th></Th>
           <Th></Th>
           <Th></Th>
-          <Th>
-            <Button onClick={() => handleFetch("next")}>Next</Button>
+          <Th></Th>
+          <Th py="1rem">
+            <Button
+              backgroundColor="#4D4847"
+              onClick={() => handleFetch("next")}
+              color="#fff"
+            >
+              Next Page
+            </Button>
           </Th>
         </Tr>
       </Tfoot>
