@@ -18,12 +18,14 @@ interface CustomTableProps {
   headers: string[];
   data: OrderType[];
   handleFetch: (direction: "next" | "prev") => void;
+  handleEdit: (item: OrderType) => void;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
   headers,
   data,
   handleFetch,
+  handleEdit,
 }) => {
   return (
     <Table size="sm">
@@ -35,23 +37,32 @@ const CustomTable: React.FC<CustomTableProps> = ({
           ))}
         </Tr>
       </Thead>
-      <Tbody>
-        {data.length ? (
-          data.map((item, index) => (
+      {data.length ? (
+        <Tbody>
+          {data.map((item, index) => (
             <Tr key={index}>
               <Td>{item.title}</Td>
               <Td>{item.bookingDate}</Td>
               <Td>{item.address.street}</Td>
               <Td>{item.address.country}</Td>
               <Td>{item.customer.name}</Td>
+              <Td>
+                <Button
+                  onClick={() => handleEdit(item)}
+                  backgroundColor="#8BAAAD"
+                  size="sm"
+                >
+                  Edit
+                </Button>
+              </Td>
             </Tr>
-          ))
-        ) : (
-          <Flex justifyContent="center" py="2rem" width="100%">
-            <Heading>No Data</Heading>
-          </Flex>
-        )}
-      </Tbody>
+          ))}
+        </Tbody>
+      ) : (
+        <Flex justifyContent="center" py="2rem" width="100%">
+          <Heading>No Data</Heading>
+        </Flex>
+      )}
       <Tfoot>
         <Tr>
           <Th>

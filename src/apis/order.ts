@@ -32,3 +32,13 @@ export const addNewOrder = async (payload: any) => {
     throw error
   }
 }
+
+export const updateOrder = async (payload: {title: string, bookingDate: string | "number"}, id: string) => {
+  console.log(id, '-->response')
+  try {
+    const response = await axios.put(`http://localhost:3090/orders/${id}`, payload)
+    console.log(response.data, '-==>>')
+  } catch (error) {
+    throw error
+  }
+}

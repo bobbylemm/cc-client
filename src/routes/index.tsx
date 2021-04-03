@@ -12,7 +12,7 @@ const AppRoutes: React.FC = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/orders" component={Orders} />
-        <Route exact path="/orders/:orderid" component={OrderDetail} />
+        <Route exact path="/orders/:orderId" component={OrderDetail} />
       </Switch>
     </Router>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { useToast } from "@chakra-ui/react";
 
@@ -7,6 +8,7 @@ import OrdersView from "../../components/presentational/orders/Orders";
 import { getOrders, addNewOrder } from "../../apis";
 import MainLayout from "../../components/layouts/main";
 import { OrderType } from "../../types";
+import { OrdersProvider, useOrdersDispatch } from "../../context/OrdersContext";
 
 interface OrdersProps {}
 
@@ -18,14 +20,16 @@ interface OrdersState {
 }
 
 const Orders: React.FC<OrdersProps> = () => {
+  const history = useHistory();
+  const toast = useToast();
+  const ordersDispatch = useOrdersDispatch();
+
   const [state, setState] = useState<OrdersState>({
     orders: [],
     lastDoc: null,
     firstDoc: null,
     openAddModal: false,
   });
-
-  const toast = useToast();
 
   const NewOrderSchema = Yup.object().shape({
     title: Yup.string().required("Title required"),
@@ -97,8 +101,9 @@ const Orders: React.FC<OrdersProps> = () => {
   }, []);
 
   const fetchOrders = async (direction: "next" | "prev", doc?: any) => {
-    const orders = await getOrders(direction, doc);
-    setState((s) => ({ ...s, ...orders }));
+    const response = await getOrders(direction, doc);
+    setState((s) => ({ ...s, ...response }));
+    ordersDispatch({ type: "currentOrders", payload: response.orders });
   };
 
   const handleFetch = async (direction: "next" | "prev") => {
@@ -107,6 +112,19 @@ const Orders: React.FC<OrdersProps> = () => {
       prev: state.firstDoc,
     };
     await fetchOrders(direction, docToUse[direction]);
+  };
+
+  const handleEdit = (item: any) => {
+    if (!item.uid) {
+      return toast({
+        title: "No Order ID",
+        description: "This order id was not found!!",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    history.push(`/orders/${item.uid}`);
   };
 
   return (
@@ -134,6 +152,7 @@ const Orders: React.FC<OrdersProps> = () => {
           setState((s) => ({ ...s, openAddModal: false }))
         }
         modalIsOpen={state.openAddModal}
+        handleEdit={handleEdit}
       />
     </MainLayout>
   );

@@ -11,6 +11,7 @@ interface OrdersViewProps {
   modalIsOpen: boolean;
   handleCloseModal: () => void;
   handleOpenModal: () => void;
+  handleEdit: (item: any) => void;
 }
 
 const OrdersView: React.FC<OrdersViewProps> = ({
@@ -21,13 +22,14 @@ const OrdersView: React.FC<OrdersViewProps> = ({
   handleCloseModal,
   addNewOrderProps,
   modalIsOpen,
+  handleEdit,
 }) => {
   return (
     <>
       <Flex
         justifyContent="center"
         alignItems="center"
-        height="100vh"
+        minHeight="100vh"
         backgroundColor="#000F08"
         flexDirection="column"
       >
@@ -42,7 +44,7 @@ const OrdersView: React.FC<OrdersViewProps> = ({
           p="1rem"
           borderRadius=".4rem"
         >
-          <CustomTable {...{ headers, data, handleFetch }} />
+          <CustomTable {...{ headers, data, handleFetch, handleEdit }} />
         </Box>
       </Flex>
       <AddOrderModal

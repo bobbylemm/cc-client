@@ -11,4 +11,5 @@ export interface OrderType {
     };
     title: string;
     bookingDate: string | number;
+    uid?: string;
 }
