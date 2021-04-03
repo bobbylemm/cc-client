@@ -5,17 +5,31 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-interface LoginViewProps {}
+interface LoginViewProps {
+  onChange: (e: React.ChangeEvent<any>) => void;
+  values: {
+    email: string;
+    password: string;
+  };
+  errors: {
+    email: string | undefined;
+    password: string | undefined;
+  };
+  onSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+}
 
-const LoginView: React.FC<LoginViewProps> = () => {
+const LoginView: React.FC<LoginViewProps> = ({
+  errors,
+  onChange,
+  onSubmit,
+  values,
+}) => {
   return (
     <Flex
       minH={"100vh"}
@@ -41,11 +55,21 @@ const LoginView: React.FC<LoginViewProps> = () => {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                name="email"
+                onChange={onChange}
+                value={values.email}
+              />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input
+                name="password"
+                onChange={onChange}
+                value={values.password}
+                type="password"
+              />
             </FormControl>
             <Stack spacing={5}>
               <Box />
@@ -55,6 +79,7 @@ const LoginView: React.FC<LoginViewProps> = () => {
                 _hover={{
                   bg: "blue.500",
                 }}
+                onClick={(e: any) => onSubmit(e)}
               >
                 Sign in
               </Button>
