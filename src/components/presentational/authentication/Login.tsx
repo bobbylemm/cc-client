@@ -11,6 +11,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 interface LoginViewProps {
   onChange: (e: React.ChangeEvent<any>) => void;
   values: {
@@ -22,6 +23,7 @@ interface LoginViewProps {
     password: string | undefined;
   };
   onSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+  submitting: boolean;
 }
 
 const LoginView: React.FC<LoginViewProps> = ({
@@ -29,6 +31,7 @@ const LoginView: React.FC<LoginViewProps> = ({
   onChange,
   onSubmit,
   values,
+  submitting,
 }) => {
   return (
     <Flex
@@ -60,8 +63,19 @@ const LoginView: React.FC<LoginViewProps> = ({
                 name="email"
                 onChange={onChange}
                 value={values.email}
+                placeholder="john@example.com"
               />
             </FormControl>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.2, easings: "easeInOut" },
+              }}
+              style={{ color: "red", fontSize: "14px" }}
+            >
+              {errors.email}
+            </motion.span>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <Input
@@ -69,8 +83,19 @@ const LoginView: React.FC<LoginViewProps> = ({
                 onChange={onChange}
                 value={values.password}
                 type="password"
+                placeholder="*****"
               />
             </FormControl>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.2, easings: "easeInOut" },
+              }}
+              style={{ color: "red", fontSize: "14px" }}
+            >
+              {errors.password}
+            </motion.span>
             <Stack spacing={5}>
               <Box />
               <Button
@@ -79,6 +104,7 @@ const LoginView: React.FC<LoginViewProps> = ({
                 _hover={{
                   bg: "blue.500",
                 }}
+                isLoading={submitting}
                 onClick={(e: any) => onSubmit(e)}
               >
                 Sign in
