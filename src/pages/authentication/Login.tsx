@@ -1,4 +1,5 @@
 import React from "react";
+import { useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,6 +11,7 @@ interface LoginProps {}
 
 const Login: React.FC<LoginProps> = () => {
   const history = useHistory();
+  const toast = useToast();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email().required("Email required"),
@@ -25,8 +27,15 @@ const Login: React.FC<LoginProps> = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      const response = await login(values);
+      await login(values);
       history.push("/orders");
+      toast({
+        title: "Login successfull.",
+        description: "you were successfully authenticated",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     },
   });
 
