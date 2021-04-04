@@ -142,7 +142,7 @@ const OrderForm: React.FC<OrderFormProps> = ({
             isInvalid={!!errors.customerPhone && !!touched.customerPhone}
           >
             <Input
-              placeholder="enter city"
+              placeholder="enter customer phone"
               onChange={actionType === "creating" ? onChange : () => true}
               value={values.customerPhone as string}
               disabled={actionType === "creating" ? false : true}

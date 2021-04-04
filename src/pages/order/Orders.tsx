@@ -32,11 +32,13 @@ const Orders: React.FC<OrdersProps> = () => {
   });
 
   const NewOrderSchema = Yup.object().shape({
-    title: Yup.string().required("Title required"),
-    addressStreet: Yup.string().required("Address street required"),
+    title: Yup.string().required("Title required").min(3),
+    addressStreet: Yup.string().required("Address street required").min(5),
     addressCountry: Yup.string().required("Address country required"),
-    addressCity: Yup.string().required("Address city required"),
-    bookingDate: Yup.string().required("booking date required"),
+    addressCity: Yup.string().required("Address city required").min(2),
+    bookingDate: Yup.string()
+      .required("booking date required")
+      .matches(/^\d{2}[./-]\d{2}[./-]\d{4}$/, "not valid date ex: 12/12/2020"),
     customerName: Yup.string().required("customer name required"),
     customerPhone: Yup.string().required("customer phone required").min(12),
     customerEmail: Yup.string().required("customer email required"),
@@ -74,23 +76,27 @@ const Orders: React.FC<OrdersProps> = () => {
           country: addressCountry,
           street: addressStreet,
         },
-        bookingDate,
+        bookingDate: new Date(bookingDate).getTime() / 1000,
         customer: {
           name: customerName,
           email: customerEmail,
           phone: customerPhone,
         },
       };
-      await addNewOrder(payload);
-      resetForm();
-      setState((s) => ({ ...s, openAddModal: false }));
-      toast({
-        title: "New Order Added.",
-        description: "you have successfully added a new order",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      try {
+        await addNewOrder(payload);
+        resetForm();
+        setState((s) => ({ ...s, openAddModal: false }));
+        toast({
+          title: "New Order Added.",
+          description: "you have successfully added a new order",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      } catch (error) {
+        console.log(error, "-==>212");
+      }
     },
   });
 
