@@ -6,7 +6,9 @@ This project was created with React and Typescript, parcel was used as the bundl
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn start` - to startup the application
+
+### `yarn test` - to run unit tests available
 
 ## Libraries used
 
