@@ -10,24 +10,25 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  FormErrorMessage,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+
+interface Payload {
+  email: any;
+  password: any;
+}
 interface LoginViewProps {
   onChange: (e: React.ChangeEvent<any>) => void;
-  values: {
-    email: string;
-    password: string;
-  };
-  errors: {
-    email: string | undefined;
-    password: string | undefined;
-  };
+  values: Payload;
+  errors: Payload;
+  touched: Payload;
   onSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
   submitting: boolean;
 }
 
 const LoginView: React.FC<LoginViewProps> = ({
   errors,
+  touched,
   onChange,
   onSubmit,
   values,
@@ -56,7 +57,10 @@ const LoginView: React.FC<LoginViewProps> = ({
           p={8}
         >
           <Stack spacing={4}>
-            <FormControl id="email">
+            <FormControl
+              id="email"
+              isInvalid={!!errors.email && !!touched.email}
+            >
               <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
@@ -65,18 +69,13 @@ const LoginView: React.FC<LoginViewProps> = ({
                 value={values.email}
                 placeholder="john@example.com"
               />
+              <FormErrorMessage>{errors.email}</FormErrorMessage>
             </FormControl>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.2, easings: "easeInOut" },
-              }}
-              style={{ color: "red", fontSize: "14px" }}
+
+            <FormControl
+              id="password"
+              isInvalid={!!errors.password && !!touched.password}
             >
-              {errors.email}
-            </motion.span>
-            <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <Input
                 name="password"
@@ -85,17 +84,8 @@ const LoginView: React.FC<LoginViewProps> = ({
                 type="password"
                 placeholder="*****"
               />
+              <FormErrorMessage>{errors.password}</FormErrorMessage>
             </FormControl>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.2, easings: "easeInOut" },
-              }}
-              style={{ color: "red", fontSize: "14px" }}
-            >
-              {errors.password}
-            </motion.span>
             <Stack spacing={5}>
               <Box />
               <Button

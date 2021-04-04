@@ -43,6 +43,7 @@ const OrdersView: React.FC<OrdersViewProps> = ({
           backgroundColor="#F4FFF8"
           p="1rem"
           borderRadius=".4rem"
+          overflowX="auto"
         >
           <CustomTable {...{ headers, data, handleFetch, handleEdit }} />
         </Box>

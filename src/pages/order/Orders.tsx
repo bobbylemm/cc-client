@@ -95,7 +95,15 @@ const Orders: React.FC<OrdersProps> = () => {
           isClosable: true,
         });
       } catch (error) {
-        console.log(error, "-==>212");
+        if (error.message && error.message === "Network Error") {
+          toast({
+            title: "Action Failed",
+            description: "could not send your request now, please try later",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     },
   });

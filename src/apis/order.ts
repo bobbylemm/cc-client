@@ -32,7 +32,7 @@ export const addNewOrder = async (payload: any) => {
   }
 }
 
-export const updateOrder = async (payload: {title: string, bookingDate: string | "number"}, id: string) => {
+export const updateOrder = async (payload: {title: string, bookingDate: string | number}, id: string) => {
   try {
     return await axios.put(`http://localhost:3090/orders/${id}`, payload)
   } catch (error) {

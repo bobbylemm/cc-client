@@ -46,6 +46,10 @@ const Login: React.FC<LoginProps> = () => {
       onSubmit={formik.handleSubmit}
       errors={{ email: formik.errors.email, password: formik.errors.password }}
       submitting={formik.isSubmitting}
+      touched={{
+        email: formik.touched.email,
+        password: formik.touched.password,
+      }}
     />
   );
 };

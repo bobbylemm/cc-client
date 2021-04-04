@@ -44,16 +44,28 @@ const OrderDetail: React.FC<OrderDetailProps> = ({ match }) => {
         title,
         bookingDate,
       };
-      await updateOrder(payload, match.params.orderId);
-      resetForm();
-      history.push("/orders");
-      toast({
-        title: "Order Updated Successfully.",
-        description: "you have updated this order successfully",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      try {
+        await updateOrder(payload, match.params.orderId);
+        resetForm();
+        history.push("/orders");
+        toast({
+          title: "Order Updated Successfully.",
+          description: "you have updated this order successfully",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      } catch (error) {
+        if (error.message && error.message === "Network Error") {
+          toast({
+            title: "Action Failed",
+            description: "could not send your request now, please try later",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
     },
   });
 
