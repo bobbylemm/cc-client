@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import { fireStore } from "./firebase";
+import { base_api_url } from './config'
 
 const orderRef = fireStore.collection("orders");
 
@@ -26,7 +27,7 @@ export const getOrders = async (direction: "next" | "prev", docToUse?: any) => {
 
 export const addNewOrder = async (payload: any) => {
   try {
-    return await axios.post('http://localhost:3090/orders', payload)
+    return await axios.post(`${base_api_url}/orders`, payload)
   } catch (error) {
     throw error
   }
@@ -34,7 +35,7 @@ export const addNewOrder = async (payload: any) => {
 
 export const updateOrder = async (payload: {title: string, bookingDate: string | number}, id: string) => {
   try {
-    return await axios.put(`http://localhost:3090/orders/${id}`, payload)
+    return await axios.put(`${base_api_url}/orders/${id}`, payload)
   } catch (error) {
     throw error
   }
