@@ -4,7 +4,7 @@ This project was created with React and Typescript, parcel was used as the bundl
 
 ### LIVE URL
 
-[App](https://606ae3366caf8d00076e985f--pedantic-carson-911677.netlify.app/login)
+[App](https://606b13c8f82d7d0008386612--pedantic-carson-911677.netlify.app)
 
 ## Available Scripts
 
