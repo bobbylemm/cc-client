@@ -2,6 +2,10 @@
 
 This project was created with React and Typescript, parcel was used as the bundler.\
 
+### LIVE URL
+
+[App](https://606ae3366caf8d00076e985f--pedantic-carson-911677.netlify.app/login)
+
 ## Available Scripts
 
 In the project directory, you can run:
