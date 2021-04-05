@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development parcel public/index.html --open",
-    "start": "NODE_ENV=production parcel public/index.html --open",
+    "start": "parcel public/index.html --open",
     "build": "parcel build public/index.html",
     "test": "jest --verbose"
   },
