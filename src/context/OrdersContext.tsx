@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderType } from "~/types";
+import { OrderType } from "../types";
 
 type Action = { type: "currentOrders"; payload: any };
 type Dispatch = (action: Action) => void;

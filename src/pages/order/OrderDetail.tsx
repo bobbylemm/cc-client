@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { OrderType } from "../../types";
-import MainLayout from "../../components/layouts/main";
+import MainLayout from "../../components/layouts/Main";
 import { useOrdersState } from "../../context/OrdersContext";
 import OrderDetailView from "../../components/presentational/orders/OrderDetail";
 import { updateOrder } from "../../apis";

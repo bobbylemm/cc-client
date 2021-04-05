@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 
 import OrdersView from "../../components/presentational/orders/Orders";
 import { getOrders, addNewOrder } from "../../apis";
-import MainLayout from "../../components/layouts/main";
+import MainLayout from "../../components/layouts/Main";
 import { OrderType } from "../../types";
 import { OrdersProvider, useOrdersDispatch } from "../../context/OrdersContext";
 
