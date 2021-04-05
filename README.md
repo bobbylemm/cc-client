@@ -15,3 +15,11 @@ In the project directory, you can run:
 - `Chakra UI` was used to enable swift developement
 - `Formik and Yup` for form management
 - `axios` for Http communication with backend API
+
+## How To Run Project
+
+- First clone this project
+- Run `yarn install`
+- Create a `.env` file using the `.env-sample` file in the project
+- Run `yarn test` to view client tests status
+- Finally run `yarn start`
